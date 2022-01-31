@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Carta</title>
+        
+    </head>
+
+    <body style="background-color:#ebcce9;">
+        <!--Imagen de prueba, se cambia con la que se obtiene de la bd-->
+        <p>
+            <a href="{{url_for('home')}}"><button style="width: 30%;margin-left: 35%;padding: 20px 0 20px 0;">Regresar</button></a>
+            <center style="margin-top: -5%;">
+                <img src="{{img}}"
+                alt="Aquí aparece la imagend de la chica"
+                width="25%"
+                class="idol">
+                <!--nombre de la carta-->
+                <br><br><br><br><br><br><br>
+                <font color = "Purple" size = 14 face = "arial">
+                   {{nombreCarta}}
+                </font>
+                <!--Nombre de la idol-->
+                <font color = "Purple" face = "arial">
+                    <h1>{{personaje}}</h1>
+                </font>
+                <!--Stats-->
+                <font color = "Gray" face = arial>
+                    <h2>Stats:</h2> 
+                </font>
+
+               <!--Atributo: smile-->
+               <font face = "arial" color = "#ee48a6">
+                <h3>Smile: {{atributos.Smile}}</h3> 
+               </font>
+               <!--Atrubuto: pure-->
+               <font face = "arial" color = "#10ac10">
+                <h3>Pure: {{atributos.Pure}}</h3> 
+               </font>
+               <!--Atributo: cool-->
+               <font face = "arial" color = "#1a8ff3">
+                <h3>Cool: {{atributos.Cool}}</h3>
+               </font>
+                <br>
+                <!--Falta la opción del form? creo que era post-->
+               <input type="button" href="form_update" value="Editar carta" onclick="btn_funct()" id="btn_form">
+               <a href="{{url_for('borrar',id='')}}{{id}}"><input type="button" value="Borrar carta"></a>
+
+            </center>
+        </p>
+        <p>
+            <br><br><br><br><br>
+            <!--Aparece lo del formulario mágicamente-->
+            <center>
+                <br>
+                <div id="foo">
+                    
+                </div>
+            </center>            
+        </p>
+            
+        
+        <script>
+            let cont = false;
+            let contador= 0;
+            function btn_funct(){
+                let formulario = document.getElementById('foo')
+                if(cont){
+                    formulario.classList.add('ocultar')
+                    cont=!cont
+                    return 0;
+                }
+                if(contador==0){
+                    let html=''
+                    formulario.innerHTML+= `<form action={{url_for('update', id ='') }}`+'{{id}}'+` `+`method="POST">                                              
+                                <label for="personaje">Nombre de la idol: </label>
+                                <input name="personaje" required type="text"  id="personaje"> <!--Nombre de la mona-->
+                                <label for="img">Url de la imagen: </label>
+                                <input id="img" name="img" required type="text"  > <!--url de la imagen-->
+                                <label for="Smile">Valor del atributo Smile</label>
+                                <input id="Smile" name="Smile" required type="text"  > <!--valor smile-->
+                                <label for="Pure">Valor del atributo Pure</label>
+                                <input id="Pure" name="Pure" required type="text"  > <!--valor pure-->
+                                <label for="Cool">Valor del atributo Cool</label>
+                                <input id="Cool" name="Cool" required type="text"  > <!--Valorcool-->
+                                <label for="HP">Valor del atributo HP</label>
+                                <input id="HP" name="HP" required type="text"  > <!--valorHP-->
+                                <input type="submit" value="Actualizar" style="padding-top: 5px;padding-bottom: 5px;">                       
+                        </form>`
+                    document.documentElement.scrollTo(0,1000)
+                    contador = 1;
+                }
+                formulario.classList.remove('ocultar')                
+                cont=!cont
+            }
+        </script>
+    </body>
+
+</html>
+<style>
+    img.idol{
+        float:left;
+        margin-top: 9%;
+        margin-left: 10%;
+    }
+    form{
+        font-family: Arial;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+input[type=text] {
+    width: 80%;
+    padding: 8px 18px;
+    margin: 6px 0;
+    box-sizing: border-box;
+  }
+    .ocultar{
+        visibility: hidden;
+    }
+</style>

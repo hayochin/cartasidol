@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Carta</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='estilo.css')}}">  
+
+</head>
+<body style="background-color:#ebcce9;" >
+    <font color = "Purple" size=5>
+        <center>
+            <h1 aling = "center" style="font-size: 20;font-family: Arial;">Agregar Carta</h1>
+        </center>
+    </font>
+    <div class="tablita" >
+        <div class="cajita" style="width: 60%;display: flex;justify-content: center;flex-direction: column;">
+            <form action="{{url_for('agregarCarta')}}"id="formulario" method="POST">
+                <label for="personaje">Personaje: </label>
+                <input type="text" id="personaje" name="personaje">
+                <br>
+                <label for="nombreCarta">Nombre de la Carta: </label>
+                <input type="text" id="nombreCarta" name="nombreCarta">
+                <br>
+                <label for="img">URL imagen</label>
+                <input type="text" id="img" name="img">
+                <br>
+                <label for="Smile">Smile: </label>
+                <input type="text" id="Smile" name="Smile">
+                <br>
+                <label for="Pure">Pure: </label>
+                <input type="text" id="Pure" name="Pure">
+                <br>
+                <label for="Cool">Cool: </label>
+                <input type="text" id="Cool" name="Cool">
+                <br>
+                <label for="HP">HP: </label>
+                <input type="text" id="HP" name="HP">
+                <input type="submit" value="Agregar Carta" style="padding-top: 5px;padding-bottom: 5px;width: 100%;">
+            </form>
+            <br>
+            <a href="{{url_for('home')}}"><button style="padding-top: 5px;padding-bottom: 5px;width: 100%;">Regresar</button></a>
+        </div>        
+    </div>
+</body>
+</html>

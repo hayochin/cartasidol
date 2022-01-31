@@ -1,0 +1,38 @@
+.tablita{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap-reverse;
+}
+
+.cajita{    
+    width: 50%;
+    background: #ebcce9;
+    border: 1px solid transparent;
+}
+.cajita:Hover{
+    background: #e1e1e1;
+    border: 1px solid #d0d0d0;
+    
+}
+.brillar{
+    background-color: #e1e1e1;
+    color: black;    
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 8px 18px;
+    margin: 6px 0;
+    box-sizing: border-box;
+  }
+
+.is-hidden{
+    visibility: hidden;
+    display: block;    
+    width: 50%;
+    background-color: aqua;
+}
+table{
+    border: radius 1px;;
+    border-color: black;
+}

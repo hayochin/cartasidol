@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='estilo.css')}}">  
+    <script >
+        let asdc = JSON.parse(("{{res}}").replaceAll('&#34;','"'))//limpiamos la cadena y lo convertimos a Json
+        // asdc= JSON.parse((asdc.replaceAll("&#39;",'"')))
+    </script>
+</head>
+<body style="background-color:#ebcce9;" >
+        <font color = "Purple" size=5>
+            <center>
+                <h1 aling = "center" style="font-size: 20;font-family: Arial;">Buscador de cartas</h1>
+            </center>
+        </font>
+        <font color = "Gray" size = 5 face = "arial">
+            <center><p> Nombre de la carta a buscar: </p></center><br>
+        </font>
+        <center>
+            <form action="{{url_for('filtroNombre')}}" method="POST">
+                <input name="nombre" required type="text" placeholder="Nombre de idol aquí" id="nombre">
+                <br><br>
+                <input type="submit" value="Buscar carta" >
+            </form>
+            <form action="{{url_for('agregar_p')}}">
+                <input type="submit" value="Agregar Carta" id="btn_agregar">
+            </form>        
+            <br><br>
+            <div id ='tabla' class="tablita">
+                
+            </div>        
+        </center>
+        <script>
+            function enviar(par) {
+                
+                document.getElementById('nombre').value = par
+                document.getElementById('nombre').classList.add('brillar')
+            }         
+            let html = ''
+            asdc.forEach(element => {
+                
+                html += ` <a href={{url_for('carta', nombreCarta= '')}}`+(element['nombreCarta']).replaceAll(" ","&")+` onclick="enviar('${element["nombreCarta"]}')" id-data="${element['_id']}" style="color: inherit; text-decoration: inherit; " ><div class="cajita">
+                    <p>${element['nombreCarta']}</p>
+                    <img src="${element['img']}" style="width:40%;display:block;">
+                    <h3>${element['personaje']}</h3>
+                    <table >
+                        <tr>
+                        <td style="background:#ee48a6;text-align:center;border-radius:10%;">
+                            Smile: ${element['atributos']['Smile']}
+                        </td>
+                        <td style="background:#10ac10;text-align:center;border-radius:10%;">
+                            Pure: ${element['atributos']['Pure']}
+                        </td>
+                        <td style="background:#1a8ff3;text-align:center;border-radius:10%;">
+                            Cool: ${element['atributos']['Cool']}
+                        </td>
+                        <td style="background:#2faa7b;text-align:center;border-radius:10%;">
+                            HP: ${element['atributos']['HP']}
+                        </td></tr>
+                        </table>
+                </div></a>
+                `
+            });
+            
+            document.querySelector('#tabla').innerHTML=html
+        </script>
+</body>
+</html>
